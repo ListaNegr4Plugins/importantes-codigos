@@ -1,0 +1,22 @@
+static File arquivo = new File("plugins/SeuPlugin/Tutorial.yml");
+	
+	static FileConfiguration tutorial = YamlConfiguration.loadConfiguration(arquivo);
+	
+	public static void saveTutorial() {
+	    try {
+               if (!arquivo.exists()){
+                   tutorial.addDefault("Nome", "Object");
+                   tutorial.options().copyDefaults(true);
+               }
+	        tutorial.save(arquivo);
+	    } catch (IOException e) {
+	        Bukkit.getConsoleSender().sendMessage("§cNão foi possivel salvar o arquivo Tutorial.yml");
+	    }
+	}
+	
+	public static void setDefault(String nome, Object valor, FileConfiguration tutorial){
+		if (!tutorial.contains(nome)){
+			tutorial.set(nome, valor);
+			saveTutorial();
+		}
+	}
